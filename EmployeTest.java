@@ -1,11 +1,6 @@
 package tn.esprit.spring;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThat;
-
 import java.util.Date;
-import java.util.List ;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -37,14 +32,16 @@ public class EmployeTest {
     @Autowired
     EntrepriseServiceImpl entrepriseService;
     private final static Logger l = LogManager.getLogger(EmployeTest.class);
-
-    @Test
-  public  void ajoutEmploye() {
-        Employe employe = new Employe("houda", "bettayeb", "houda.bettayeb@esprit.tn", true, Role.CHEF_DEPARTEMENT);
-        employeService.ajouterEmploye(employe);
-        l.info("ajoute avec succes");
-    }
     
+    @Test
+    void ajoutEmploye() {
+        var employe = new Employe("houda", "bettayeb", "houda.bettayeb@esprit.tn", true, Role.CHEF_DEPARTEMENT);
+        employeService.ajouterEmploye(employe);
+        long start = System.currentTimeMillis();
+        long elapsedTime = System.currentTimeMillis() - start;
+        l.info("Method execution time: " + elapsedTime + " milliseconds.");
+        l.info("l'employé est ajouté");
+    }
 
     @Test
   public  void getNombreEmploye() {
@@ -78,8 +75,8 @@ Role.CHEF_DEPARTEMENT);
     }
 
     @Test
-   public  void affecterEmployeADepartement() {
-        Employe employe = new Employe("houda", "bettayeb", "houdabettayeb@esprit.tn", true, Role.CHEF_DEPARTEMENT);
+    void affecterEmployeADepartement() {
+        Employe employe = new Employe("houda", "bettayeb", "houda.bettayeb@esprit.tn", true, Role.CHEF_DEPARTEMENT);
         employeService.ajouterEmploye(employe);
         Departement departement = new Departement("testing");
         entrepriseService.ajouterDepartement(departement);
